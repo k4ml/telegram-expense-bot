@@ -3,6 +3,12 @@ const Expense = require('./Classes/Expense')
     , _ = require('lodash');
 
 function parseExpenseMessage(messageText) {
+    messageParts = _.split(messageText, ' ')
+    console.log(messageParts)
+    if (!_.startsWith(messageParts[0], '/') && !isFinite(messageParts[0])) {
+        // not a command and not a number either
+        return [messageText];
+    }
     if (/-*\d+\.\d+[a-zA-z\ ]+/.test(messageText)) {
         return [
             parseFloat(messageText.match(/-*\d+\.\d+/)),

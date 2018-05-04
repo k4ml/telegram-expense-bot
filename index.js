@@ -52,6 +52,8 @@ function processNonCommand(message) {
 
     // A message consisting anything else - probably an expense to add
     var parsed = utils.parseExpenseMessage(message.text);
+    console.log(parsed);
+    if (parsed && parsed.length == 1) { return }
     if (!parsed[0] || _.isNumber(!parsed[0]) || !parsed[1]) return bot.sendMessage(new bot.classes.Message(message.chat.id, 'Sorry, it looks like I didn\'t understand you. Maybe you forgot the decimal point in a number? Please try again.'), () => {});
     commands.new(message, [parsed[0], parsed[1], parsed[2] ? parsed[2] : null]);
 }
